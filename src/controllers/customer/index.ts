@@ -5,7 +5,7 @@ import { deleteCustomer, getCustomers, newCustomer } from './customerController'
 export interface ICustomerDTO {
   id: string;
   custName: string;
-  address1: number;
+  address1: string;
   address2: string;
   province: string;
   district: string;

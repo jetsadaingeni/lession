@@ -1,18 +1,38 @@
 import { Request, Response } from 'express';
 import { ICustomerDTO } from '.';
 import { awilixContainer } from '../../awilixSetup';
-import { IResponseDTO } from '../../models/request';
+import { IResponseDTO, ResponseSuccess, ResponseSuccessData } from '../../models/request';
 import { ICustomerManager } from '../../services/customer';
 
 const service: ICustomerManager = awilixContainer.resolve('customerManager');
 export async function getCustomers(req: Request, res: Response): IResponseDTO<ICustomerDTO[]> {
-  return res.send(await service.getAll());
+  // #swagger.tags = ['customers']
+  try {
+    /*  #swagger.responses[200] = {
+                schema: { $ref: '#/definitions/customerIDO' }
+            } 
+    */
+    return res.send(await service.getAll());
+  } catch (err) {
+    return res.send({ error: err.message });
+  }
 }
 
 export async function newCustomer(
   req: Request<any, any, ICustomerDTO, any>,
   res: Response
-): IResponseDTO<{ success: string; data: ICustomerDTO }> {
+): IResponseDTO<ResponseSuccessData> {
+  /*
+    #swagger.tags = ['customers']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+         schema: { $ref: '#/definitions/customerIDONoID' }
+      }
+    #swagger.responses[200] = {
+          schema: { $ref: '#/definitions/responseSuccessDataCustomerIDO' }
+      } 
+  */
   try {
     const response = await service.create(req.body);
     const mapping: ICustomerDTO = {
@@ -33,7 +53,18 @@ export async function newCustomer(
 export async function deleteCustomer(
   req: Request<any, any, ICustomerDTO, any>,
   res: Response
-): IResponseDTO<{ success: string; data: ICustomerDTO }> {
+): IResponseDTO<ResponseSuccess> {
+  /*
+    #swagger.tags = ['customers']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+         schema: { $ref: '#/definitions/deleteCustomerReq' }
+      }
+    #swagger.responses[200] = {
+        schema: { $ref: '#/definitions/responseSuccessCustomerIDO' }
+    } 
+  */
   try {
     await service.delete(req.body.id);
     return res.send({ success: 'Delete customer success' });

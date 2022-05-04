@@ -1,0 +1,260 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "",
+      "description": ""
+    }
+  ],
+  "schemes": [],
+  "securityDefinitions": {},
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/customer/getall": {
+      "get": {
+        "tags": [
+          "customers"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/customerIDO"
+            }
+          }
+        }
+      }
+    },
+    "/customer/newCustomer": {
+      "post": {
+        "tags": [
+          "customers"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/customerIDONoID"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/responseSuccessDataCustomerIDO"
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/customer/deleteCustomer": {
+      "post": {
+        "tags": [
+          "customers"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/deleteCustomerReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/responseSuccessCustomerIDO"
+            },
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "customerIDOObj": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "210001"
+        },
+        "custName": {
+          "type": "string",
+          "example": "Suzy Queue"
+        },
+        "address1": {
+          "type": "string",
+          "example": "4455 Landing"
+        },
+        "address2": {
+          "type": "string",
+          "example": "Lange, APT 4"
+        },
+        "province": {
+          "type": "string",
+          "example": "Louisville"
+        },
+        "district": {
+          "type": "string",
+          "example": "KY"
+        },
+        "zipCode": {
+          "type": "string",
+          "example": "40018"
+        }
+      }
+    },
+    "customerIDO": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "210001"
+          },
+          "custName": {
+            "type": "string",
+            "example": "Suzy Queue"
+          },
+          "address1": {
+            "type": "string",
+            "example": "4455 Landing"
+          },
+          "address2": {
+            "type": "string",
+            "example": "Lange, APT 4"
+          },
+          "province": {
+            "type": "string",
+            "example": "Louisville"
+          },
+          "district": {
+            "type": "string",
+            "example": "KY"
+          },
+          "zipCode": {
+            "type": "string",
+            "example": "40018"
+          }
+        }
+      }
+    },
+    "customerIDONoID": {
+      "type": "object",
+      "properties": {
+        "custName": {
+          "type": "string",
+          "example": "Suzy Queue"
+        },
+        "address1": {
+          "type": "string",
+          "example": "4455 Landing"
+        },
+        "address2": {
+          "type": "string",
+          "example": "Lange, APT 4"
+        },
+        "province": {
+          "type": "string",
+          "example": "Louisville"
+        },
+        "district": {
+          "type": "string",
+          "example": "KY"
+        },
+        "zipCode": {
+          "type": "string",
+          "example": "40018"
+        }
+      }
+    },
+    "deleteCustomerReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "210001"
+        }
+      }
+    },
+    "responseSuccessDataCustomerIDO": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "string",
+          "example": "Create customer success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "210001"
+            },
+            "custName": {
+              "type": "string",
+              "example": "Suzy Queue"
+            },
+            "address1": {
+              "type": "string",
+              "example": "4455 Landing"
+            },
+            "address2": {
+              "type": "string",
+              "example": "Lange, APT 4"
+            },
+            "province": {
+              "type": "string",
+              "example": "Louisville"
+            },
+            "district": {
+              "type": "string",
+              "example": "KY"
+            },
+            "zipCode": {
+              "type": "string",
+              "example": "40018"
+            }
+          }
+        }
+      }
+    },
+    "responseSuccessCustomerIDO": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "string",
+          "example": "Delete customer success"
+        }
+      }
+    }
+  }
+}

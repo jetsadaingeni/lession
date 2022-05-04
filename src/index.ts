@@ -60,6 +60,9 @@ app.listen(port, () => {
 import routes from './routes';
 import { SetIp } from './middlewares/setHeader';
 import RequestLogs from './middlewares/logs';
+import swaggerUi from 'swagger-ui-express';
+import swaggerFile from './swagger/swagger-output.json';
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(SetIp);
