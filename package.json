@@ -2,6 +2,7 @@
   "name": "lession",
   "packageManager": "yarn@3.2.0",
   "scripts": {
+    "test" : "echo test",
     "start": "run build && node build/index.js",
     "dev": " ts-node-dev --respawn --transpile-only ./src/index.ts",
     "build": "rimraf ./build && tsc",
