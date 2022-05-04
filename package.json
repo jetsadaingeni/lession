@@ -5,12 +5,19 @@
     "start": "run build && node build/index.js",
     "dev": " ts-node-dev --respawn --transpile-only ./src/index.ts",
     "build": "rimraf ./build && tsc",
-    "swagger-gen": "rimraf ./src/swagger/swagger-output.json && ts-node src/swagger/swagger.ts"
+    "swagger-gen": "rimraf ./src/swagger/swagger-output.json && ts-node src/swagger/swagger.ts",
+    "postinstall": "husky install && yarn dlx husky-init --yarn2",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.4",
+    "@commitlint/config-conventional": "^16.2.4",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.29",
+    "husky": "^7.0.0",
     "nodemon": "^2.0.15",
+    "pinst": "^3.0.0",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "ts-node": "^10.7.0",
