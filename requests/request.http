@@ -1,0 +1,24 @@
+
+GET  http://localhost:4000
+###
+GET  http://localhost:4000/customer/getall
+###
+GET  http://localhost:4000/customer/getall
+x-forwarded-for: 127.0.0.1
+###
+GET http://localhost:4000/debug-sentry
+
+
+
+###
+POST  http://localhost:4000/customer/newCustomer
+Content-Type: application/json
+
+{
+   "address1": "123 Main St",
+    "address2": "",
+    "province": "ON",
+    "district": "Toronto",
+    "zipCode": "94000",
+    "custName": "John Doe",
+}

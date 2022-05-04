@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#841c7e",
+    "titleBar.activeBackground": "#982192",
+    "titleBar.activeForeground": "#FEF9F8"
+  },
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
