@@ -56,7 +56,11 @@ export class CustomerManager implements ICustomerManager {
 
   async delete(id: string): Promise<void> {
     try {
-      await this.customerCommands.delete(id);
+      const res = await this.customerQueries.getById(id);
+      if (res)
+        await this.customerCommands.delete(id);
+      else
+        throw new Error("Customer doesn't exist");
     } catch (err) {
       throw err;
     }
