@@ -2,7 +2,7 @@ import { ICustomer } from '../../models/customer';
 
 export interface ICustomerQueries {
   getAll(): Promise<ICustomer[]>;
-  getById(id: string): Promise<ICustomer>;
+  getById(id: string): Promise<ICustomer | undefined>;
   getMaxId(): Promise<string | undefined>;
 }
 

@@ -5,16 +5,19 @@ import { ICustomer } from '../../models/customer';
 export default class CustomerQueries implements ICustomerQueries {
   constructor() {}
 
-  getAll(): Promise<ICustomer[]> {
-    return db.select<ICustomer>('*').from('customer');
+  async getAll(): Promise<ICustomer[]> {
+    const res = await db
+      .select<ICustomer[]>('*')
+      .fromRaw('(select * from customer order by id asc) as customer');
+    return res;
   }
 
-  getById(id: number): Promise<ICustomer> {
-    const res = db.select<ICustomer[]>('*').from('customer').where({ id });
+  async getById(id: string): Promise<ICustomer> {
+    const res = await db.select<ICustomer[]>('*').from('customer').where({ id });
     if (res) {
       return res[0];
     } else {
-      return null;
+      return undefined;
     }
   }
 
