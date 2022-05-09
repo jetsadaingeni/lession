@@ -7,7 +7,8 @@ export default class CustomerCommands implements ICustomerCommands {
     return db('customer').insert(customer);
   }
   update(customer: ICustomer): Promise<number[]> {
-    return db('customer').upsert(customer);
+    const data = { ...customer, id: undefined };
+    return db('customer').where({ id: customer.id }).update(data);
   }
   delete(id: string): Promise<number[]> {
     return db('customer').where({ id }).del();

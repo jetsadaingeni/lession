@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { IResponseDTO } from '../../models/request';
-import { deleteCustomer, getCustomers, newCustomer } from './customerController';
+import { deleteCustomer, getCustomers, newCustomer, updateCustomer } from './customerController';
 
 export interface ICustomerDTO {
   id: string;
@@ -17,4 +17,5 @@ export const customerController = {
   getCustomers: getCustomers,
   newCustomer: newCustomer,
   deleteCustomer: deleteCustomer,
+  updateCustomer: updateCustomer,
 };

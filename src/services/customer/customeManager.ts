@@ -54,13 +54,23 @@ export class CustomerManager implements ICustomerManager {
     }
   }
 
+  async update(customer: ICustomerDTO): Promise<void> {
+    try {
+      const res = await this.customerQueries.getById(customer.id);
+      const convertData = { ...customer, zip_code: customer.zipCode, cust_name: customer.custName };
+      const { zipCode, custName, ...rest } = convertData;
+      if (res) await this.customerCommands.update(rest);
+      else throw new Error("Customer doesn't exist");
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async delete(id: string): Promise<void> {
     try {
       const res = await this.customerQueries.getById(id);
-      if (res)
-        await this.customerCommands.delete(id);
-      else
-        throw new Error("Customer doesn't exist");
+      if (res) await this.customerCommands.delete(id);
+      else throw new Error("Customer doesn't exist");
     } catch (err) {
       throw err;
     }

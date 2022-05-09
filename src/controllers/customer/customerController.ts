@@ -50,14 +50,38 @@ export async function newCustomer(
   }
 }
 
+export async function updateCustomer(
+  req: Request<{ id: string }, any, Omit<ICustomerDTO, 'id'>, any>,
+  res: Response
+): IResponseDTO<ResponseSuccessData> {
+  /*
+    #swagger.tags = ['customers']
+    #swagger.parameters['obj'] = {
+        in: 'body',
+        required: true,
+         schema: { $ref: '#/definitions/customerIDONoID' }
+      }
+    #swagger.responses[200] = {
+          schema: { $ref: '#/definitions/responseSuccessDataCustomerIDO' }
+      } 
+  */
+  try {
+    const id = req.params.id;
+    const response = await service.update({...req.body , id});
+    return res.send({ success: 'Create update success' });
+  } catch (err) {
+    return res.send({ error: err.message });
+  }
+}
+
 export async function deleteCustomer(
-  req: Request<any, any, ICustomerDTO, any>,
+  req: Request<{ id: string }, any, ICustomerDTO, any>,
   res: Response
 ): IResponseDTO<ResponseSuccess> {
   /*
     #swagger.tags = ['customers']
     #swagger.parameters['obj'] = {
-        in: 'body',
+        in: 'param',
         required: true,
          schema: { $ref: '#/definitions/deleteCustomerReq' }
       }
@@ -66,7 +90,7 @@ export async function deleteCustomer(
     } 
   */
   try {
-    await service.delete(req.body.id);
+    await service.delete(req.params.id);
     return res.send({ success: 'Delete customer success' });
   } catch (err) {
     return res.send({ error: err.message });
